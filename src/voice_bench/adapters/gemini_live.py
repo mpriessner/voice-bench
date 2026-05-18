@@ -7,6 +7,7 @@ Uses the google-genai Python SDK (>= 1.0) with client.aio.live.connect.
 """
 
 import asyncio
+import base64
 import json
 import os
 import time
@@ -64,33 +65,65 @@ class GeminiLiveAdapter:
         model: str | None = None,
         voice: str | None = None,
     ) -> None:
-        self.api_key = api_key or os.environ["GEMINI_API_KEY"]
+        self.api_key = (
+            api_key
+            or os.environ.get("GEMINI_API_KEY")
+            or os.environ.get("GOOGLE_API_KEY")
+        )
+        if not self.api_key:
+            raise ValueError("Set GEMINI_API_KEY or GOOGLE_API_KEY environment variable")
         self.model = model or os.environ.get("GEMINI_LIVE_MODEL", DEFAULT_MODEL)
         self.voice = voice or os.environ.get("GEMINI_VOICE", DEFAULT_VOICE)
         self.client = genai.Client(api_key=self.api_key)
 
+    @staticmethod
+    def _schema_from_dict(d: dict) -> types.Schema:
+        """Recursively convert a JSON Schema dict to a types.Schema object."""
+        type_map = {
+            "boolean": "BOOLEAN", "string": "STRING", "number": "NUMBER",
+            "integer": "INTEGER", "object": "OBJECT", "array": "ARRAY",
+        }
+        kwargs: dict = {}
+        if "type" in d:
+            kwargs["type"] = type_map.get(d["type"].lower(), d["type"].upper())
+        if "description" in d:
+            kwargs["description"] = d["description"]
+        if "enum" in d:
+            kwargs["enum"] = d["enum"]
+        if "properties" in d:
+            kwargs["properties"] = {
+                k: GeminiLiveAdapter._schema_from_dict(v)
+                for k, v in d["properties"].items()
+            }
+        if "required" in d:
+            kwargs["required"] = d["required"]
+        if "items" in d:
+            kwargs["items"] = GeminiLiveAdapter._schema_from_dict(d["items"])
+        return types.Schema(**kwargs)
+
     def _build_config(
         self, tools: list[DummyTool], system_prompt: str
-    ) -> types.LiveConnectConfig:
-        gemini_tools = [
-            {"function_declarations": [t.to_gemini_declaration() for t in tools]}
-        ] if tools else []
-
-        return types.LiveConnectConfig(
-            response_modalities=["AUDIO"],
-            system_instruction=types.Content(
-                parts=[types.Part(text=system_prompt)],
-                role="system",
-            ),
-            tools=gemini_tools,
-            speech_config=types.SpeechConfig(
-                voice_config=types.VoiceConfig(
-                    prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name=self.voice
-                    )
+    ) -> dict:
+        gemini_tools: list = []
+        if tools:
+            declarations = [
+                types.FunctionDeclaration(
+                    name=t.name,
+                    description=t.description,
+                    parameters=self._schema_from_dict(t.parameters),
                 )
-            ),
-        )
+                for t in tools
+            ]
+            gemini_tools = [types.Tool(function_declarations=declarations)]
+
+        # AUDIO modality required — gemini-3.1-flash-live-preview rejects TEXT
+        # with a 1011 WebSocket error. We score tool calls, not audio output;
+        # any audio chunks received are logged but ignored for scoring.
+        return {
+            "response_modalities": ["AUDIO"],
+            "system_instruction": system_prompt,
+            "tools": gemini_tools,
+        }
 
     async def probe(self) -> dict:
         """Connect, confirm setup-complete, disconnect. Returns probe metadata."""
@@ -144,17 +177,23 @@ class GeminiLiveAdapter:
                 ) as session:
                     timeline.ts_setup_complete = time.time()
 
-                    # ── Stream audio ──────────────────────────────────────
+                    # ── Send audio as a complete client turn ──────────────
+                    # send_client_content with turn_complete=True gives explicit
+                    # turn control — no VAD needed. send_realtime_input relies on
+                    # server-side VAD which silently discards pre-recorded audio.
                     timeline.ts_input_audio_start = time.time()
-                    for i in range(0, len(audio_bytes), AUDIO_CHUNK_BYTES):
-                        await session.send_realtime_input(
-                            audio=types.Blob(
-                                data=audio_bytes[i : i + AUDIO_CHUNK_BYTES],
-                                mime_type="audio/pcm;rate=16000",
-                            )
-                        )
-                    # The 500 ms trailing silence in the WAV acts as end-of-turn
-                    # marker for providers with VAD. No explicit signal needed.
+                    await session.send_client_content(
+                        turns={
+                            "role": "user",
+                            "parts": [{
+                                "inline_data": {
+                                    "mime_type": "audio/pcm;rate=16000",
+                                    "data": base64.b64encode(audio_bytes).decode(),
+                                }
+                            }],
+                        },
+                        turn_complete=True,
+                    )
                     timeline.ts_input_audio_end = time.time()
 
                     # ── Receive loop ──────────────────────────────────────
@@ -167,6 +206,21 @@ class GeminiLiveAdapter:
 
                         if timeline.ts_first_event_received is None:
                             timeline.ts_first_event_received = ts
+
+                        # Log every message for debugging
+                        raw_events.append(RawProviderEvent(
+                            turn_id=turn_id, ts=ts, kind="raw_message",
+                            payload_json=json.dumps({
+                                "has_tool_call": message.tool_call is not None,
+                                "has_data": message.data is not None,
+                                "has_text": message.text is not None,
+                                "has_server_content": message.server_content is not None,
+                                "turn_complete": (
+                                    message.server_content.turn_complete
+                                    if message.server_content else False
+                                ),
+                            }),
+                        ))
 
                         # ── Tool call ─────────────────────────────────
                         if message.tool_call:
