@@ -1,0 +1,452 @@
+[
+  {
+    "id": "p001",
+    "text": "Turn on the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p002",
+    "text": "Turn off the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p003",
+    "text": "Show the grid overlay",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p004",
+    "text": "Enable macro mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p005",
+    "text": "Turn off image stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p006",
+    "text": "Please activate the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p007",
+    "text": "Switch off the grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p008",
+    "text": "Disable macro focus",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p009",
+    "text": "Turn on stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p010",
+    "text": "Enable voice captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p011",
+    "text": "Turn off captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p012",
+    "text": "Flash on please",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p013",
+    "text": "I need the grid lines",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p014",
+    "text": "Deactivate stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p015",
+    "text": "Hide the grid overlay",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p016",
+    "text": "Close-up mode on",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p017",
+    "text": "Flash off",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p018",
+    "text": "Enable image stabilizer",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p019",
+    "text": "Please show grid lines on screen",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p020",
+    "text": "Turn off macro",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p021",
+    "text": "Start the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p022",
+    "text": "Disable voice subtitles",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p023",
+    "text": "Stabilization please",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p024",
+    "text": "I want to see the composition grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p025",
+    "text": "Shut off the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p026",
+    "text": "Macro off",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p027",
+    "text": "Can you enable captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p028",
+    "text": "Turn on the close-up lens",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p029",
+    "text": "Remove the grid from the screen",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "p030",
+    "text": "Switch the flash on",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "train",
+    "negative": false
+  },
+  {
+    "id": "v001",
+    "text": "Flash please",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v002",
+    "text": "No more flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v003",
+    "text": "Grid overlay on",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v004",
+    "text": "Turn on close-up mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v005",
+    "text": "I want stabilization off",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v006",
+    "text": "Show me the grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v007",
+    "text": "Disable the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v008",
+    "text": "Enable optical stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v009",
+    "text": "Captions on",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "v010",
+    "text": "Turn off macro mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "val",
+    "negative": false
+  },
+  {
+    "id": "h001",
+    "text": "Flash on",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h002",
+    "text": "Switch off the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h003",
+    "text": "I need the grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h004",
+    "text": "Macro mode please",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h005",
+    "text": "No stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h006",
+    "text": "Please disable the grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h007",
+    "text": "Activate stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {"on": true},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h008",
+    "text": "Turn off close-up mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h009",
+    "text": "Captions off",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  },
+  {
+    "id": "h010",
+    "text": "Flash off please",
+    "expected_tool": "toggle_flash",
+    "expected_args": {"on": false},
+    "tier_min": 1,
+    "split": "holdout",
+    "negative": false
+  }
+]

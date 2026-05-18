@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+dist/
+*.egg-info/
+results/*.jsonl
+results/*.csv
+results/*.html
+optimizations/
+prompts/audio/**/*.wav
+prompts/audio/**/*.aiff
+!prompts/audio/.gitkeep
