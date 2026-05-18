@@ -89,7 +89,7 @@ class GeminiLiveAdapter:
         if "description" in d:
             kwargs["description"] = d["description"]
         if "enum" in d:
-            kwargs["enum"] = d["enum"]
+            kwargs["enum"] = [str(v) for v in d["enum"]]
         if "properties" in d:
             kwargs["properties"] = {
                 k: GeminiLiveAdapter._schema_from_dict(v)

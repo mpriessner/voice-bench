@@ -420,8 +420,81 @@ TIER_5_TOOLS: list[DummyTool] = [
     ),
 ]
 
+# ── Tier 6: advanced / compound ───────────────────────────────────────────────
+
+TIER_6_TOOLS: list[DummyTool] = [
+    DummyTool(
+        name="toggle_hdr",
+        description="Enable or disable HDR capture mode.",
+        parameters={
+            "type": "object",
+            "properties": {"on": {"type": "boolean", "description": "True to enable HDR."}},
+            "required": ["on"],
+        },
+        tier=6,
+    ),
+    DummyTool(
+        name="set_color_profile",
+        description="Set the color profile for captured images.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "profile": {
+                    "type": "string",
+                    "enum": ["srgb", "display_p3", "raw"],
+                    "description": "Color profile to use.",
+                }
+            },
+            "required": ["profile"],
+        },
+        tier=6,
+    ),
+    DummyTool(
+        name="set_review_mode",
+        description="Set how long captured photos are shown for review.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "string",
+                    "enum": ["off", "1s", "3s", "5s"],
+                    "description": "Review display duration.",
+                }
+            },
+            "required": ["duration"],
+        },
+        tier=6,
+    ),
+    DummyTool(
+        name="toggle_location_tags",
+        description="Enable or disable GPS location embedding in captured media.",
+        parameters={
+            "type": "object",
+            "properties": {"on": {"type": "boolean", "description": "True to enable location tags."}},
+            "required": ["on"],
+        },
+        tier=6,
+    ),
+    DummyTool(
+        name="set_video_fps",
+        description="Set the video recording frame rate.",
+        parameters={
+            "type": "object",
+            "properties": {
+                "fps": {
+                    "type": "string",
+                    "enum": ["24", "30", "60", "120"],
+                    "description": "Frames per second: 24, 30, 60, or 120.",
+                }
+            },
+            "required": ["fps"],
+        },
+        tier=6,
+    ),
+]
+
 ALL_TOOLS: list[DummyTool] = (
-    TIER_1_TOOLS + TIER_2_TOOLS + TIER_3_TOOLS + TIER_4_TOOLS + TIER_5_TOOLS
+    TIER_1_TOOLS + TIER_2_TOOLS + TIER_3_TOOLS + TIER_4_TOOLS + TIER_5_TOOLS + TIER_6_TOOLS
 )
 
 
