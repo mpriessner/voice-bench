@@ -13,18 +13,21 @@ DEFAULT_TIMEOUTS: dict[str, float] = {
 
 @runtime_checkable
 class NativeVoiceAdapter(Protocol):
+    REQUIRES_AUDIO: bool
+
     async def probe(self) -> dict:
         """Connect, confirm setup-complete, disconnect. Returns probe metadata."""
         ...
 
     async def run_turn(
         self,
-        audio_wav_path: Path,
+        audio_wav_path: Path | None,
         tools: list[DummyTool],
         system_prompt: str,
         turn_id: str,
         prompt_id: str,
         timeouts: dict | None = None,
+        prompt_text: str | None = None,
     ) -> TurnResult:
         """Run one benchmark turn. Returns TurnResult with full timeline."""
         ...

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "ss001",
+    "description": "Core tool, no swap needed — take_photo is always loaded.",
+    "initial_toolset": "camera_basics",
+    "turns": [
+      {
+        "id": "ss001t01",
+        "text": "Take a photo.",
+        "expected_tool": "take_photo",
+        "expected_args": {}
+      }
+    ]
+  },
+  {
+    "id": "ss002",
+    "description": "Single-pool tool in initial toolset — no swap needed.",
+    "initial_toolset": "camera_basics",
+    "turns": [
+      {
+        "id": "ss002t01",
+        "text": "Show the composition grid.",
+        "expected_tool": "toggle_grid_overlay",
+        "expected_args": {"on": true}
+      },
+      {
+        "id": "ss002t02",
+        "text": "Set white balance to daylight.",
+        "expected_tool": "set_white_balance",
+        "expected_args": {"preset": "daylight"}
+      }
+    ]
+  },
+  {
+    "id": "ss003",
+    "description": "Swap from camera_basics to lab_imaging, then use a lab tool.",
+    "initial_toolset": "camera_basics",
+    "turns": [
+      {
+        "id": "ss003t01",
+        "text": "Switch to the lab imaging toolset.",
+        "expected_tool": "switch_toolset",
+        "expected_args": {"name": "lab_imaging"}
+      },
+      {
+        "id": "ss003t02",
+        "text": "Switch to the 20x objective.",
+        "expected_tool": "set_microscope_objective",
+        "expected_args": {"magnification": "20x"}
+      }
+    ]
+  },
+  {
+    "id": "ss004",
+    "description": "Swap from lab_imaging back to camera_basics, then use a camera tool.",
+    "initial_toolset": "lab_imaging",
+    "turns": [
+      {
+        "id": "ss004t01",
+        "text": "Switch to the camera basics toolset.",
+        "expected_tool": "switch_toolset",
+        "expected_args": {"name": "camera_basics"}
+      },
+      {
+        "id": "ss004t02",
+        "text": "Set white balance to daylight.",
+        "expected_tool": "set_white_balance",
+        "expected_args": {"preset": "daylight"}
+      }
+    ]
+  },
+  {
+    "id": "ss005",
+    "description": "Lab data scenario: swap to lab_data then record.",
+    "initial_toolset": "camera_basics",
+    "turns": [
+      {
+        "id": "ss005t01",
+        "text": "Switch to the lab data toolset.",
+        "expected_tool": "switch_toolset",
+        "expected_args": {"name": "lab_data"}
+      },
+      {
+        "id": "ss005t02",
+        "text": "Start a recording labelled trial one with h264 codec.",
+        "expected_tool": "start_recording",
+        "expected_args": {"label": "trial one", "codec": "h264"}
+      }
+    ]
+  },
+  {
+    "id": "ss006",
+    "description": "Camera advanced: swap and use exposure control.",
+    "initial_toolset": "camera_basics",
+    "turns": [
+      {
+        "id": "ss006t01",
+        "text": "Switch to advanced camera controls.",
+        "expected_tool": "switch_toolset",
+        "expected_args": {"name": "camera_advanced"}
+      },
+      {
+        "id": "ss006t02",
+        "text": "Increase exposure by one stop.",
+        "expected_tool": "set_exposure",
+        "expected_args": {"ev": 1.0}
+      }
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 
 
 class TerminalReason(str, Enum):
@@ -11,6 +11,7 @@ class TerminalReason(str, Enum):
     PROVIDER_ERROR = "PROVIDER_ERROR"
     NO_TOOL_CALLED = "NO_TOOL_CALLED"
     DISCONNECTED = "DISCONNECTED"
+    OUT_OF_TOOL_SCOPE = "OUT_OF_TOOL_SCOPE"
 
 
 @dataclass
@@ -18,6 +19,7 @@ class TurnTimeline:
     turn_id: str
     agent: str
     prompt_id: str
+    model_kind: Literal["voice", "text", "voice_swap"] = "voice"
     ts_connect_start: Optional[float] = None
     ts_setup_complete: Optional[float] = None
     ts_input_audio_start: Optional[float] = None
@@ -27,6 +29,30 @@ class TurnTimeline:
     ts_tool_response_sent: Optional[float] = None
     ts_first_output_audio: Optional[float] = None
     ts_turn_complete: Optional[float] = None
+    ts_swap_request: Optional[float] = None         # when swap initiated (switch_toolset tool response sent)
+    ts_swap_session_opened: Optional[float] = None  # when new session connected (Gemini: restart cost)
+    ts_swap_ack: Optional[float] = None             # when swap confirmed (OpenAI: session.updated; Gemini: verbal turn_complete)
+
+    @property
+    def swap_rtt_ms(self) -> Optional[int]:
+        """User-visible swap latency: from initiation to full confirmation."""
+        if self.ts_swap_ack and self.ts_swap_request:
+            return round((self.ts_swap_ack - self.ts_swap_request) * 1000)
+        return None
+
+    @property
+    def swap_mechanism_ms(self) -> Optional[int]:
+        """Cross-provider KPI: time from swap request to new session ready (excludes verbal confirmation)."""
+        if self.ts_swap_session_opened and self.ts_swap_request:
+            return round((self.ts_swap_session_opened - self.ts_swap_request) * 1000)
+        return None
+
+    @property
+    def swap_ux_delay_ms(self) -> Optional[int]:
+        """Verbal confirmation cost: time from session ready to spoken confirmation received."""
+        if self.ts_swap_ack and self.ts_swap_session_opened:
+            return round((self.ts_swap_ack - self.ts_swap_session_opened) * 1000)
+        return None
 
     @property
     def ttf_tool_ms(self) -> Optional[int]:
@@ -40,11 +66,19 @@ class TurnTimeline:
             return int((self.ts_first_output_audio - self.ts_input_audio_end) * 1000)
         return None
 
+    @property
+    def ttf_request_to_call_ms(self) -> Optional[int]:
+        """Time from first event received (request sent) to first tool call, for text adapters."""
+        if self.ts_first_tool_call_emitted and self.ts_first_event_received:
+            return int((self.ts_first_tool_call_emitted - self.ts_first_event_received) * 1000)
+        return None
+
     def to_dict(self) -> dict:
         return {
             "turn_id": self.turn_id,
             "agent": self.agent,
             "prompt_id": self.prompt_id,
+            "model_kind": self.model_kind,
             "ts_connect_start": self.ts_connect_start,
             "ts_setup_complete": self.ts_setup_complete,
             "ts_input_audio_start": self.ts_input_audio_start,
@@ -54,8 +88,15 @@ class TurnTimeline:
             "ts_tool_response_sent": self.ts_tool_response_sent,
             "ts_first_output_audio": self.ts_first_output_audio,
             "ts_turn_complete": self.ts_turn_complete,
+            "ts_swap_request": self.ts_swap_request,
+            "ts_swap_session_opened": self.ts_swap_session_opened,
+            "ts_swap_ack": self.ts_swap_ack,
             "ttf_tool_ms": self.ttf_tool_ms,
             "ttfs_ms": self.ttfs_ms,
+            "ttf_request_to_call_ms": self.ttf_request_to_call_ms,
+            "swap_rtt_ms": self.swap_rtt_ms,
+            "swap_mechanism_ms": self.swap_mechanism_ms,
+            "swap_ux_delay_ms": self.swap_ux_delay_ms,
         }
 
 
@@ -66,6 +107,7 @@ class ToolCallEvent:
     args: dict
     call_id: str
     ts_called: float
+    toolset_at_call: str | None = None
 
     def to_dict(self) -> dict:
         return {
@@ -74,6 +116,7 @@ class ToolCallEvent:
             "args": self.args,
             "call_id": self.call_id,
             "ts_called": self.ts_called,
+            "toolset_at_call": self.toolset_at_call,
         }
 
 
@@ -100,6 +143,7 @@ class TurnResult:
     raw_events: list[RawProviderEvent]
     transcripts: dict[str, str]
     terminal_reason: TerminalReason
+    swap_events: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return {
@@ -108,6 +152,7 @@ class TurnResult:
             "raw_events": [re.to_dict() for re in self.raw_events],
             "transcripts": self.transcripts,
             "terminal_reason": self.terminal_reason.value,
+            "swap_events": self.swap_events,
         }
 
 
@@ -117,15 +162,19 @@ class Score:
     arg_score: float
     ttfs_ms: Optional[int]
     ttf_tool_ms: Optional[int]
+    ttf_request_to_call_ms: Optional[int]
     extra_calls: int
     duplicate_calls: int
     malformed_calls: int
     wrong_tool_first: bool
     no_call_made: bool
     negative_prompt_violation: bool
+    is_negative: bool = False
 
     @property
     def passed(self) -> bool:
+        if self.is_negative:
+            return not self.negative_prompt_violation and not self.malformed_calls
         return self.tool_name_match and self.arg_score >= 0.8 and not self.malformed_calls
 
     def to_dict(self) -> dict:
@@ -135,6 +184,7 @@ class Score:
             "arg_score": round(self.arg_score, 4),
             "ttfs_ms": self.ttfs_ms,
             "ttf_tool_ms": self.ttf_tool_ms,
+            "ttf_request_to_call_ms": self.ttf_request_to_call_ms,
             "extra_calls": self.extra_calls,
             "duplicate_calls": self.duplicate_calls,
             "malformed_calls": self.malformed_calls,
