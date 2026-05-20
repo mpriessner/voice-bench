@@ -14,11 +14,10 @@ import time
 import uuid
 from pathlib import Path
 
-import numpy as np
-import soundfile as sf
 from google import genai
 from google.genai import types
 
+from ..audio import load_pcm16
 from ..models import (
     RawProviderEvent,
     TerminalReason,
@@ -28,6 +27,7 @@ from ..models import (
 )
 from ..tools import DummyTool
 from .base import DEFAULT_TIMEOUTS
+from ._gemini_common import schema_from_dict
 
 # SciSymbioLens-Android GeminiLiveWebSocket.kt:45 — confirmed working model.
 DEFAULT_MODEL = "gemini-3.1-flash-live-preview"
@@ -35,35 +35,18 @@ DEFAULT_VOICE = "Kore"
 AUDIO_CHUNK_BYTES = 2048  # ~64ms of 16kHz PCM16 mono
 
 
-def _load_pcm16_16k(wav_path: Path) -> bytes:
-    """Read a WAV file and return raw PCM16 bytes at 16 kHz mono.
-
-    Resamples if the source rate differs. Provider-specific rates (e.g. OpenAI
-    expects 24 kHz) are handled at the caller level for other adapters.
-    """
-    data, src_rate = sf.read(str(wav_path), dtype="int16", always_2d=False)
-    if data.ndim > 1:
-        data = data.mean(axis=1).astype(np.int16)
-
-    if src_rate != 16000:
-        from fractions import Fraction
-        from scipy.signal import resample_poly
-
-        ratio = Fraction(16000, src_rate).limit_denominator(100)
-        data = resample_poly(data.astype(np.float32), ratio.numerator, ratio.denominator)
-        data = np.clip(data, -32768, 32767).astype(np.int16)
-
-    return data.tobytes()
-
-
 class GeminiLiveAdapter:
     """Adapter for Gemini Live native voice model."""
+
+    REQUIRES_AUDIO = True
 
     def __init__(
         self,
         api_key: str | None = None,
         model: str | None = None,
         voice: str | None = None,
+        agent_name: str = "gemini-live",
+        force_tool_call: bool = True,
     ) -> None:
         self.api_key = (
             api_key
@@ -74,32 +57,9 @@ class GeminiLiveAdapter:
             raise ValueError("Set GEMINI_API_KEY or GOOGLE_API_KEY environment variable")
         self.model = model or os.environ.get("GEMINI_LIVE_MODEL", DEFAULT_MODEL)
         self.voice = voice or os.environ.get("GEMINI_VOICE", DEFAULT_VOICE)
+        self.agent_name = agent_name
+        self.force_tool_call = force_tool_call  # Live API ignores this; always auto
         self.client = genai.Client(api_key=self.api_key)
-
-    @staticmethod
-    def _schema_from_dict(d: dict) -> types.Schema:
-        """Recursively convert a JSON Schema dict to a types.Schema object."""
-        type_map = {
-            "boolean": "BOOLEAN", "string": "STRING", "number": "NUMBER",
-            "integer": "INTEGER", "object": "OBJECT", "array": "ARRAY",
-        }
-        kwargs: dict = {}
-        if "type" in d:
-            kwargs["type"] = type_map.get(d["type"].lower(), d["type"].upper())
-        if "description" in d:
-            kwargs["description"] = d["description"]
-        if "enum" in d:
-            kwargs["enum"] = [str(v) for v in d["enum"]]
-        if "properties" in d:
-            kwargs["properties"] = {
-                k: GeminiLiveAdapter._schema_from_dict(v)
-                for k, v in d["properties"].items()
-            }
-        if "required" in d:
-            kwargs["required"] = d["required"]
-        if "items" in d:
-            kwargs["items"] = GeminiLiveAdapter._schema_from_dict(d["items"])
-        return types.Schema(**kwargs)
 
     def _build_config(
         self, tools: list[DummyTool], system_prompt: str
@@ -110,7 +70,7 @@ class GeminiLiveAdapter:
                 types.FunctionDeclaration(
                     name=t.name,
                     description=t.description,
-                    parameters=self._schema_from_dict(t.parameters),
+                    parameters=schema_from_dict(t.parameters),
                 )
                 for t in tools
             ]
@@ -119,10 +79,13 @@ class GeminiLiveAdapter:
         # AUDIO modality required — gemini-3.1-flash-live-preview rejects TEXT
         # with a 1011 WebSocket error. We score tool calls, not audio output;
         # any audio chunks received are logged but ignored for scoring.
+        # NOTE: LiveConnectConfig does not accept tool_config (known SDK gap);
+        # function_calling_config.mode=ANY is unsupported on the Live API.
         return {
             "response_modalities": ["AUDIO"],
             "system_instruction": system_prompt,
             "tools": gemini_tools,
+            "input_audio_transcription": {},  # enables user-turn transcript (Story 4)
         }
 
     async def probe(self) -> dict:
@@ -136,28 +99,29 @@ class GeminiLiveAdapter:
                 ) as session:
                     ts_ready = time.time()
                     return {
-                        "agent": "gemini-live",
+                        "agent": self.agent_name,
                         "model": self.model,
                         "voice": self.voice,
                         "connect_ms": int((ts_ready - ts_start) * 1000),
                         "status": "ok",
                     }
         except asyncio.TimeoutError:
-            return {"agent": "gemini-live", "model": self.model, "status": "timeout"}
+            return {"agent": self.agent_name, "model": self.model, "status": "timeout"}
         except Exception as e:
-            return {"agent": "gemini-live", "model": self.model, "status": "error", "error": str(e)}
+            return {"agent": self.agent_name, "model": self.model, "status": "error", "error": str(e)}
 
     async def run_turn(
         self,
-        audio_wav_path: Path,
+        audio_wav_path: Path | None,
         tools: list[DummyTool],
         system_prompt: str,
         turn_id: str,
         prompt_id: str,
         timeouts: dict | None = None,
+        prompt_text: str | None = None,
     ) -> TurnResult:
         t = timeouts or DEFAULT_TIMEOUTS
-        timeline = TurnTimeline(turn_id=turn_id, agent="gemini-live", prompt_id=prompt_id)
+        timeline = TurnTimeline(turn_id=turn_id, agent=self.agent_name, prompt_id=prompt_id)
         tool_calls: list[ToolCallEvent] = []
         raw_events: list[RawProviderEvent] = []
         transcripts: dict[str, str] = {"user": "", "ai": ""}
@@ -165,7 +129,7 @@ class GeminiLiveAdapter:
         seen_call_ids: set[str] = set()
 
         config = self._build_config(tools, system_prompt)
-        audio_bytes = _load_pcm16_16k(audio_wav_path)
+        audio_bytes = load_pcm16(audio_wav_path, target_rate=16000)
 
         timeline.ts_connect_start = time.time()
 

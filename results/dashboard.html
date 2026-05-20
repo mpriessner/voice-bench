@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>voice-bench dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+<style>
+/* ── Swap section ─────────────────────────────────────── */
+.swap-section { margin: 2rem 0; }
+.swap-section h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: #e2e8f0; }
+.swap-intro { font-size: 0.83rem; color: #94a3b8; margin-bottom: 1.2rem; line-height: 1.5; max-width: 860px; }
+
+.swap-top-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+.swap-score-card {
+  background: #1e293b; border-radius: 10px; padding: 1.2rem 1.8rem;
+  display: flex; flex-direction: column; gap: 0.4rem; min-width: 220px;
+}
+.swap-score-card .provider { font-size: 0.78rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.swap-score-card .model-id { font-size: 0.72rem; color: #64748b; margin-bottom: .2rem; }
+.swap-score-card .score { font-size: 2rem; font-weight: 700; }
+.swap-score-card .score.perfect { color: #4ade80; }
+.swap-score-card .score.good { color: #a3e635; }
+.swap-score-card .rtt-label { font-size: 0.78rem; color: #94a3b8; }
+.swap-score-card .rtt-val { font-size: 1.1rem; font-weight: 600; color: #f59e0b; }
+.swap-score-card .rtt-val.fast { color: #4ade80; }
+
+/* scenario table */
+.swap-table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+.swap-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.swap-table th { background: #1e293b; color: #94a3b8; font-weight: 600; padding: .5rem .8rem; text-align: left; white-space: nowrap; }
+.swap-table td { padding: .45rem .8rem; border-bottom: 1px solid #1e293b; vertical-align: top; }
+.swap-table tr:hover td { background: #1a2540; }
+.swap-table .sc-name { color: #e2e8f0; font-weight: 500; }
+.swap-table .sc-desc { color: #64748b; font-size: 0.75rem; }
+.swap-table .prompt-text { color: #cbd5e1; font-size: 0.75rem; max-width: 220px; }
+.swap-table .pass-cell { text-align: center; }
+.pass-badge  { display:inline-block; padding:.15rem .55rem; border-radius:4px; font-size:.72rem; font-weight:700; background:#14532d; color:#4ade80; }
+.fail-badge  { display:inline-block; padding:.15rem .55rem; border-radius:4px; font-size:.72rem; font-weight:700; background:#450a0a; color:#f87171; }
+.rtt-badge   { display:inline-block; padding:.15rem .55rem; border-radius:4px; font-size:.72rem; font-weight:600; background:#1c1917; color:#f59e0b; }
+.rtt-badge.fast { background:#14532d; color:#4ade80; }
+
+/* progression chart */
+.swap-progression { background: #1e293b; border-radius: 10px; padding: 1.2rem; margin-bottom: 1.5rem; }
+.swap-progression h3 { font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.prog-runs { display: flex; align-items: flex-end; gap: 4px; height: 80px; margin-bottom: .5rem; }
+.prog-bar-wrap { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; min-width: 60px; }
+.prog-bar { width: 100%; border-radius:4px 4px 0 0; transition: height .3s; }
+.prog-label { font-size:.68rem; color:#94a3b8; text-align:center; line-height:1.2; }
+.prog-pct { font-size:.75rem; font-weight:700; color:#e2e8f0; }
+.prog-fix { font-size:.63rem; color:#60a5fa; font-style:italic; }
+
+/* RTT comparison */
+.rtt-compare { background: #1e293b; border-radius: 10px; padding: 1.2rem; }
+.rtt-compare h3 { font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.rtt-bars { display: flex; flex-direction: column; gap: .6rem; }
+.rtt-row { display: flex; align-items: center; gap: .8rem; }
+.rtt-row-label { font-size: .75rem; color: #cbd5e1; width: 200px; flex-shrink: 0; }
+.rtt-bar-track { flex: 1; background: #0f172a; border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+.rtt-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: .5rem; font-size: .7rem; font-weight: 600; color: #fff; white-space: nowrap; transition: width .6s; }
+.rtt-note { font-size: .72rem; color: #64748b; margin-top: .6rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>voice-bench</h1>
+  <span id="subtitle">Loading…</span>
+  <div class="filter-row">
+    <label>Agent <select id="filter-agent"><option value="">All</option></select></label>
+    <label>Manifest <select id="filter-manifest"><option value="">All</option></select></label>
+    <label>Model kind <select id="filter-kind"><option value="">All</option><option value="voice">voice</option><option value="text">text</option></select></label>
+    <label>Benchmark <select id="filter-bm-mode"><option value="">All</option><option value="needle">needle-in-haystack</option><option value="diverse">diverse-tools</option></select></label>
+  </div>
+</header>
+
+<div class="stat-row" id="stat-row"></div>
+
+<div class="grid">
+
+  <div class="chart-card full-width">
+    <h2>Accuracy heatmap — agents × tool counts</h2>
+    <div id="heatmap-wrap" class="heatmap-wrap"></div>
+  </div>
+
+  <div class="chart-card">
+    <h2>Accuracy by tool count</h2>
+    <div class="chart-wrap"><canvas id="accuracy-chart"></canvas></div>
+  </div>
+
+  <div class="chart-card">
+    <h2>Latency (p50 ms)</h2>
+    <div class="chart-wrap"><canvas id="latency-chart"></canvas></div>
+  </div>
+
+  <div class="chart-card full-width">
+    <h2>Failure breakdown</h2>
+    <div class="chart-wrap" style="height:200px"><canvas id="failure-chart"></canvas></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SWAP BENCHMARK SECTION
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="chart-card full-width swap-section">
+    <h2>Dynamic tool-pool swap benchmark</h2>
+    <p class="swap-intro">
+      Voice agents can't hold 50 tools in one session without accuracy collapsing. The swap architecture solves this:
+      a small core kit is always loaded (~6 tools), and a swappable pool (~17 tools) is loaded on demand when the user
+      switches context. The benchmark tests whether the model can (a) call <code>switch_toolset</code> correctly when
+      asked, and (b) immediately use a tool from the newly-loaded pool. 11 turns across 6 scenarios. Tested on both
+      OpenAI Realtime and Gemini Live.
+    </p>
+
+    <!-- Score cards -->
+    <div class="swap-top-row" id="swap-score-cards"></div>
+
+    <!-- Scenario × adapter table — latest run per adapter -->
+    <div class="swap-table-wrap">
+      <table class="swap-table" id="swap-scenario-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Description</th>
+            <th>Voice prompt</th>
+            <th>Expected tool</th>
+            <th>OpenAI Realtime<br><span style="font-weight:400;color:#64748b">~200ms swap</span></th>
+            <th>Gemini Live<br><span style="font-weight:400;color:#64748b">~6s swap</span></th>
+          </tr>
+        </thead>
+        <tbody id="swap-scenario-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Two side-by-side panels: progression + RTT -->
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+
+      <!-- Gemini debugging progression -->
+      <div class="swap-progression" style="flex:1;min-width:340px">
+        <h3>Gemini accuracy progression (5 runs)</h3>
+        <div class="prog-runs" id="prog-runs"></div>
+        <div style="font-size:.72rem;color:#64748b;margin-top:.4rem">
+          Each bar = one benchmark run. Fixes applied between runs are shown in blue.
+        </div>
+      </div>
+
+      <!-- Swap RTT comparison -->
+      <div class="rtt-compare" style="flex:1;min-width:340px" id="rtt-compare">
+        <h3>Swap latency comparison</h3>
+        <div class="rtt-bars" id="rtt-bars"></div>
+        <p class="rtt-note">
+          OpenAI uses <code>session.update</code> (mid-session, no reconnect).
+          Gemini requires a full session restart — irreducible SDK constraint.
+          Both architectures produce correct results; the cost is latency.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chart-card full-width">
+    <h2>Turn explorer</h2>
+    <div style="overflow-x:auto">
+      <div class="explorer-controls" id="explorer-controls">
+        <label>Filter: <input id="explorer-filter" type="text" placeholder="prompt text or tool name…" style="width:240px"></label>
+        <label><select id="explorer-result"><option value="">All</option><option value="pass">Pass</option><option value="fail">Fail</option></select></label>
+      </div>
+      <table id="detail-table">
+        <thead>
+          <tr>
+            <th>Agent</th><th>Tools</th><th>Prompt</th>
+            <th>Expected</th><th>Called</th>
+            <th>Args</th><th>Latency</th><th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="detail-body"></tbody>
+      </table>
+      <div id="detail-pagination" class="pagination"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="data.js"></script>
+<script src="swap_data.js"></script>
+<script src="dashboard.js"></script>
+<script>
+/* ── Swap section renderer ─────────────────────────────────────── */
+(function renderSwap() {
+  const sd = window.__SWAP_DATA__;
+  if (!sd) return;
+
+  const runs = sd.runs;
+  const scenarios = sd.scenarios;
+
+  // Best run per adapter (highest accuracy, then latest run_id as tiebreak)
+  const bestByAgent = {};
+  for (const r of runs) {
+    const prev = bestByAgent[r.agent];
+    if (!prev || r.accuracy > prev.accuracy ||
+        (r.accuracy === prev.accuracy && r.run_id > prev.run_id)) {
+      bestByAgent[r.agent] = r;
+    }
+  }
+
+  const oa = bestByAgent["openai-realtime-swap"];
+  const gl = bestByAgent["gemini-live-swap"];
+
+  // ── Score cards ────────────────────────────────────────────────
+  const cardsEl = document.getElementById("swap-score-cards");
+  function scoreCard(run, provider, modelId, rttLabel, rttMs, rttFast) {
+    if (!run) return "";
+    const pct = Math.round(run.accuracy * 100);
+    const cls = pct === 100 ? "perfect" : pct >= 90 ? "good" : "";
+    return `<div class="swap-score-card">
+      <div class="provider">${provider}</div>
+      <div class="model-id">${modelId}</div>
+      <div class="score ${cls}">${run.passed}/${run.total} <span style="font-size:1rem;color:#94a3b8">(${pct}%)</span></div>
+      <div class="rtt-label">${rttLabel}</div>
+      <div class="rtt-val ${rttFast ? 'fast' : ''}">${rttMs}</div>
+    </div>`;
+  }
+  cardsEl.innerHTML =
+    scoreCard(oa, "OpenAI Realtime", "gpt-realtime-2", "Swap RTT (session.update)", "~200ms", true) +
+    scoreCard(gl, "Gemini Live", "gemini-3.1-flash-live-preview", "Swap RTT (session restart)", "~5.5–9.8s", false);
+
+  // ── Scenario table ────────────────────────────────────────────
+  // Build turn lookup per adapter: turn_id → pass/fail + swap_rtt
+  function turnMap(run) {
+    if (!run) return {};
+    const m = {};
+    for (const t of run.turns) m[t.turn_id] = t;
+    return m;
+  }
+  const oaMap = turnMap(oa);
+  const glMap = turnMap(gl);
+
+  // Build scenario→turn list from the GL run (same manifest)
+  const scenarioTurns = {};
+  const refRun = gl || oa;
+  if (refRun) {
+    for (const t of refRun.turns) {
+      if (!scenarioTurns[t.scenario_id]) scenarioTurns[t.scenario_id] = [];
+      scenarioTurns[t.scenario_id].push(t);
+    }
+  }
+
+  const tbody = document.getElementById("swap-scenario-body");
+  let html = "";
+  for (const [sid, scInfo] of Object.entries(scenarios)) {
+    const turns = scenarioTurns[sid] || [];
+    turns.forEach((t, i) => {
+      const oaT = oaMap[t.turn_id];
+      const glT = glMap[t.turn_id];
+
+      const oaCell = oaT
+        ? `<span class="${oaT.passed ? 'pass-badge' : 'fail-badge'}">${oaT.passed ? 'PASS' : 'FAIL'}</span>` +
+          (oaT.swap_rtt_ms ? ` <span class="rtt-badge fast">${oaT.swap_rtt_ms}ms</span>` : "")
+        : "—";
+      const glCell = glT
+        ? `<span class="${glT.passed ? 'pass-badge' : 'fail-badge'}">${glT.passed ? 'PASS' : 'FAIL'}</span>` +
+          (glT.swap_rtt_ms ? ` <span class="rtt-badge">${glT.swap_rtt_ms}ms</span>` : "")
+        : "—";
+
+      if (i === 0) {
+        html += `<tr>
+          <td rowspan="${turns.length}" style="vertical-align:top;padding-top:.6rem">
+            <div class="sc-name">${sid.toUpperCase()}</div>
+            <div class="sc-desc">${scInfo.name}</div>
+          </td>
+          <td rowspan="${turns.length}" style="vertical-align:top;padding-top:.6rem">
+            <div class="sc-desc">${scInfo.description}</div>
+          </td>
+          <td><div class="prompt-text">"${t.prompt}"</div></td>
+          <td style="color:#94a3b8;font-size:.75rem">${t.expected_tool || '—'}</td>
+          <td class="pass-cell">${oaCell}</td>
+          <td class="pass-cell">${glCell}</td>
+        </tr>`;
+      } else {
+        html += `<tr>
+          <td><div class="prompt-text">"${t.prompt}"</div></td>
+          <td style="color:#94a3b8;font-size:.75rem">${t.expected_tool || '—'}</td>
+          <td class="pass-cell">${oaCell}</td>
+          <td class="pass-cell">${glCell}</td>
+        </tr>`;
+      }
+    });
+  }
+  tbody.innerHTML = html;
+
+  // ── Gemini progression bars ───────────────────────────────────
+  const geminiRuns = runs
+    .filter(r => r.agent === "gemini-live-swap")
+    .sort((a, b) => a.run_id.localeCompare(b.run_id));
+
+  const fixes = [
+    null,
+    "_drain_confirmation deadlock fix",
+    "Clean-restart for swap sessions",
+    "Grace deadline (turn_complete)",
+    "Number-word scorer normalization",
+  ];
+
+  const progEl = document.getElementById("prog-runs");
+  const maxH = 72;
+  let progHtml = "";
+  geminiRuns.forEach((r, i) => {
+    const pct = Math.round(r.accuracy * 100);
+    const barH = Math.max(14, Math.round((pct / 100) * maxH));
+    const color = pct === 100 ? "#4ade80" : pct >= 90 ? "#a3e635" : pct >= 70 ? "#f59e0b" : "#f87171";
+    const fix = fixes[i] || null;
+    progHtml += `<div class="prog-bar-wrap">
+      <div class="prog-pct">${pct}%</div>
+      <div class="prog-bar" style="height:${barH}px;background:${color}"></div>
+      <div class="prog-label">Run ${i + 1}<br>${r.passed}/${r.total}${fix ? `<br><span class="prog-fix">${fix}</span>` : ''}</div>
+    </div>`;
+  });
+  progEl.innerHTML = progHtml;
+
+  // ── Swap RTT bars ─────────────────────────────────────────────
+  // Show per-scenario RTT for the best run of each adapter
+  const rttBarsEl = document.getElementById("rtt-bars");
+  const maxRtt = 10000;
+
+  // Collect all swap turns (is_swap_turn=true) with their RTTs
+  const oaSwaps = oa ? oa.turns.filter(t => t.is_swap_turn && t.swap_rtt_ms) : [];
+  const glSwaps = gl ? gl.turns.filter(t => t.is_swap_turn && t.swap_rtt_ms) : [];
+
+  let rttHtml = `<div style="font-size:.72rem;color:#64748b;margin-bottom:.5rem">
+    Per-scenario swap round-trip time (from tool call to verbal confirmation)</div>`;
+
+  // OpenAI aggregate
+  if (oaSwaps.length) {
+    const avg = Math.round(oaSwaps.reduce((s,t) => s+t.swap_rtt_ms,0) / oaSwaps.length);
+    const pct = Math.min(100, Math.round(avg / maxRtt * 100));
+    rttHtml += `<div class="rtt-row">
+      <div class="rtt-row-label">OpenAI Realtime (avg ${oaSwaps.length} swaps)</div>
+      <div class="rtt-bar-track">
+        <div class="rtt-bar-fill" style="width:${pct}%;background:#4ade80">${avg}ms</div>
+      </div>
+    </div>`;
+  }
+
+  // Gemini per-scenario
+  for (const t of glSwaps) {
+    const pct = Math.min(100, Math.round(t.swap_rtt_ms / maxRtt * 100));
+    const sid = t.scenario_id.toUpperCase();
+    rttHtml += `<div class="rtt-row">
+      <div class="rtt-row-label">Gemini Live — ${sid}</div>
+      <div class="rtt-bar-track">
+        <div class="rtt-bar-fill" style="width:${pct}%;background:#f59e0b">${t.swap_rtt_ms}ms</div>
+      </div>
+    </div>`;
+  }
+
+  rttBarsEl.innerHTML = rttHtml;
+
+})();
+</script>
+</body>
+</html>

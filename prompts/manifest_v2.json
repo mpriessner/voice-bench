@@ -1,0 +1,2384 @@
+[
+  {
+    "id": "p001",
+    "text": "Turn on the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p002",
+    "text": "Turn off the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p003",
+    "text": "Show the composition grid",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p004",
+    "text": "Hide the grid overlay",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p005",
+    "text": "Enable macro mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p006",
+    "text": "Disable macro mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p007",
+    "text": "Enable image stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p008",
+    "text": "Turn off image stabilization",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p009",
+    "text": "Enable voice captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p010",
+    "text": "Turn off voice captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p011",
+    "text": "Switch to the back camera",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "back"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p012",
+    "text": "Switch to the front camera",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "front"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p013",
+    "text": "Set resolution to high",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "high"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p014",
+    "text": "Set resolution to low",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "low"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p015",
+    "text": "Set white balance to daylight",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "daylight"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p016",
+    "text": "Set white balance to fluorescent",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "fluorescent"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p017",
+    "text": "Set the capture timer to five seconds",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "5s"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p018",
+    "text": "Set the timer to ten seconds",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "10s"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p019",
+    "text": "Set aspect ratio to sixteen by nine",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "16:9"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p020",
+    "text": "Set aspect ratio to one by one",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "1:1"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p021",
+    "text": "Set exposure to minus one",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": -1.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p022",
+    "text": "Increase exposure by half a stop",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": 0.5
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p023",
+    "text": "Zoom to three times",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 3.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p024",
+    "text": "Set zoom to five times",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 5.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p025",
+    "text": "Lock focus at fifty centimeters",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 0.5
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p026",
+    "text": "Lock focus at two meters",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 2.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p027",
+    "text": "Set ISO to four hundred",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 400
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p028",
+    "text": "Set ISO to sixteen hundred",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 1600
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p029",
+    "text": "Set shutter speed to one hundredth",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "1/100"
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p030",
+    "text": "Set shutter speed to two seconds",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "2s"
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p031",
+    "text": "Start recording, label it experiment one",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "experiment_1"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p032",
+    "text": "Start recording trial two, sixty second limit, H two sixty five codec",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "trial_2",
+      "max_duration_s": 60,
+      "codec": "h265"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p033",
+    "text": "Begin documentation session, call it sample analysis",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "sample_analysis"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p034",
+    "text": "Begin documentation for protein gel, project A",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "protein_gel",
+      "project_id": "PROJ-A"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p035",
+    "text": "Enable burst mode, five frames",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": true,
+      "count": 5
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p036",
+    "text": "Disable burst mode",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": false
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p037",
+    "text": "Annotate bottom of frame: time point zero",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "time point zero",
+      "position": "bottom"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p038",
+    "text": "Add center annotation: contamination suspected",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "contamination suspected",
+      "position": "center"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p039",
+    "text": "Take a photo, label it reference",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "label": "reference"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p040",
+    "text": "Take a photo with flash off",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "flash_override": "off"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p041",
+    "text": "Back camera, high resolution, flash off",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "back",
+      "resolution": "high",
+      "flash": "off"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p042",
+    "text": "Macro camera, max resolution, exposure minus half",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "macro",
+      "exposure_ev": -0.5,
+      "resolution": "max"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p043",
+    "text": "Configure session for project XYZ zero zero one",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "XYZ-001"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p044",
+    "text": "Session for project BIO forty two, experimenter Martin, auto documentation on",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "BIO-42",
+      "experimenter": "Martin",
+      "auto_documentation": true
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p045",
+    "text": "Apply the macro preset",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "macro"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p046",
+    "text": "Apply the landscape preset",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "landscape"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p047",
+    "text": "Export session as PDF",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "pdf"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p048",
+    "text": "Export session as CSV with raw data",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "csv",
+      "include_raw": true
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p049",
+    "text": "Sync to lab notebook, experiment EXP zero zero one",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-001"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p050",
+    "text": "Sync experiment EXP zero forty two to lab notebook, note: second replicate",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-042",
+      "notes": "second replicate"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p051",
+    "text": "Enable HDR mode",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p052",
+    "text": "Disable HDR mode",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p053",
+    "text": "Set color profile to Display P3",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "display_p3"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p054",
+    "text": "Set color profile to raw",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "raw"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p055",
+    "text": "Show captured photos for three seconds",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "3s"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p056",
+    "text": "Disable photo review",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "off"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p057",
+    "text": "Disable GPS location tags",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p058",
+    "text": "Enable GPS location tags",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p059",
+    "text": "Set video to sixty frames per second",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "60"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p060",
+    "text": "Set video to thirty frames per second",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "30"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false
+  },
+  {
+    "id": "p061",
+    "text": "Um, could you turn the flash on for me",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p062",
+    "text": "The flash is creating too much glare, switch it off",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p063",
+    "text": "I want grid lines on the screen, can you enable those",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p064",
+    "text": "The grid is blocking my view, remove it please",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p065",
+    "text": "I need to photograph something very small, switch to macro",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p066",
+    "text": "I'm done with close-ups, switch out of macro",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p067",
+    "text": "My hands are unsteady today, turn on the stabilizer",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p068",
+    "text": "The stabilization is fighting me when I pan, disable it",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p069",
+    "text": "I want my spoken annotations to appear on screen, turn on captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p070",
+    "text": "The caption text is covering the image, get rid of it",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p071",
+    "text": "Can you switch over to the rear-facing camera",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "back"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p072",
+    "text": "Um, let me use the front-facing camera for this",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "front"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p073",
+    "text": "I need high resolution images for the paper, set it to high",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "high"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p074",
+    "text": "Just a quick preview shot, drop the resolution down",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "low"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p075",
+    "text": "We're working under natural light today, set white balance to daylight",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "daylight"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p076",
+    "text": "The lab has fluorescent overhead lights, adjust the white balance",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "fluorescent"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p077",
+    "text": "Give me five seconds to get my hands away before it shoots",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "5s"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p078",
+    "text": "Ten second delay please, I need time to get in position",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "10s"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p079",
+    "text": "I want widescreen format, sixteen by nine",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "16:9"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p080",
+    "text": "I need square photos for the poster layout, one to one ratio",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "1:1"
+    },
+    "tier_min": 2,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p081",
+    "text": "The image is too bright, bring the exposure down by one stop",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": -1.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p082",
+    "text": "It's a bit underexposed, um, bump it up half a stop",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": 0.5
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p083",
+    "text": "Can you zoom in to three times magnification",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 3.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p084",
+    "text": "Five times magnification please, I need to see more detail",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 5.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p085",
+    "text": "Lock focus at about half a meter from the lens",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 0.5
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p086",
+    "text": "Uh, set focus distance to about two meters",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 2.0
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p087",
+    "text": "ISO four hundred should work for this lighting",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 400
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p088",
+    "text": "Very low light in here, I need sixteen hundred ISO",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 1600
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p089",
+    "text": "One hundredth of a second shutter speed please",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "1/100"
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p090",
+    "text": "I need a two second long exposure for this fluorescence shot",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "2s"
+    },
+    "tier_min": 3,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p091",
+    "text": "Start a recording session and call it experiment one",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "experiment_1"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p092",
+    "text": "Record trial two, cap it at sixty seconds, use H265 for compression",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "trial_2",
+      "max_duration_s": 60,
+      "codec": "h265"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p093",
+    "text": "Start a documentation session for sample analysis",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "sample_analysis"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p094",
+    "text": "Um, start documenting the protein gel run, this is project A",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "protein_gel",
+      "project_id": "PROJ-A"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p095",
+    "text": "Turn on burst capture, I want five shots per trigger",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": true,
+      "count": 5
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p096",
+    "text": "Turn off burst, I want single shots only",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": false
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p097",
+    "text": "Add a text note at the bottom of the frame, time point zero",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "time point zero",
+      "position": "bottom"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p098",
+    "text": "Put a warning in the middle of the frame, contamination suspected",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "contamination suspected",
+      "position": "center"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p099",
+    "text": "Take a reference photo and label it reference",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "label": "reference"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p100",
+    "text": "Take a photo, but override the flash to off for this one",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "flash_override": "off"
+    },
+    "tier_min": 4,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p101",
+    "text": "Set up the back camera at high resolution with no flash",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "back",
+      "resolution": "high",
+      "flash": "off"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p102",
+    "text": "Use the macro lens, maximum resolution, drop exposure half a stop",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "macro",
+      "exposure_ev": -0.5,
+      "resolution": "max"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p103",
+    "text": "Set up a session, the project ID is XYZ zero zero one",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "XYZ-001"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p104",
+    "text": "Configure session: project BIO forty two, Martin is the experimenter, enable auto documentation",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "BIO-42",
+      "experimenter": "Martin",
+      "auto_documentation": true
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p105",
+    "text": "Can you apply the macro preset for me",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "macro"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p106",
+    "text": "Let's use the landscape preset for this outdoor shot",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "landscape"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p107",
+    "text": "Export everything from this session as a PDF",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "pdf"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p108",
+    "text": "Export as CSV and include the raw sensor readings",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "csv",
+      "include_raw": true
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p109",
+    "text": "Push this session to the electronic lab notebook, experiment EXP zero zero one",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-001"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p110",
+    "text": "Sync to notebook for experiment EXP zero forty two, add a note that this is the second replicate",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-042",
+      "notes": "second replicate"
+    },
+    "tier_min": 5,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p111",
+    "text": "Turn on HDR, I have a high contrast scene",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p112",
+    "text": "Turn off HDR, it's making the colors look unnatural",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p113",
+    "text": "Switch the color profile to Display P3 for wider gamut",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "display_p3"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p114",
+    "text": "I need unprocessed color data, switch to raw profile",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "raw"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p115",
+    "text": "After each shot, show me the photo for three seconds",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "3s"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p116",
+    "text": "Turn off the review screen, I don't want to see each photo after capture",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "off"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p117",
+    "text": "Turn off the GPS location embedding in the photos",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p118",
+    "text": "Turn on location tagging for these field samples",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p119",
+    "text": "Switch video frame rate to sixty FPS",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "60"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "p120",
+    "text": "Thirty frames per second for the video recording",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "30"
+    },
+    "tier_min": 6,
+    "split": "train",
+    "difficulty": "v2",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h001",
+    "text": "It's way too dark to see the sample clearly",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h002",
+    "text": "All my highlights are blowing out from the light",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h003",
+    "text": "I keep getting the slide off-center, help me align the shot",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h004",
+    "text": "I'm done composing, the lines are in the way now",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h005",
+    "text": "The colonies are less than a millimeter wide, I can't get them in focus",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h006",
+    "text": "Back to normal distance photography now",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h007",
+    "text": "Every shot is coming out blurry from hand movement",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h008",
+    "text": "I'm mounting this on a tripod, I don't want any digital correction",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h009",
+    "text": "I need to see what I'm saying while I'm documenting",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h010",
+    "text": "The subtitles are blocking the sample I need to see",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 1,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h011",
+    "text": "I need the main lens for this shot",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "back"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h012",
+    "text": "I need to face the camera toward me now",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "front"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h013",
+    "text": "These images need to be publication quality",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "high"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h014",
+    "text": "I only need a rough check, don't waste storage",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "low"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h015",
+    "text": "The colors look a bit warm, we're in outdoor lighting here",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "daylight"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h016",
+    "text": "Everything looks greenish because of these tubes above me",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "fluorescent"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h017",
+    "text": "I need a moment to step back after pressing the button",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "5s"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h018",
+    "text": "I have to move the sample into place before it fires",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "10s"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h019",
+    "text": "The display I'm presenting on is widescreen",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "16:9"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h020",
+    "text": "Everything needs to be square format for the report figures",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "1:1"
+    },
+    "tier_min": 2,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h021",
+    "text": "I'm losing all the detail in the bright areas, it's completely washed out",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": -1.0
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h022",
+    "text": "The image is too dark, I can't see the fine structures",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": 0.5
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h023",
+    "text": "I need to get a bit closer without physically moving the camera",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 3.0
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h024",
+    "text": "That structure is too small to see at this distance, get closer",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 5.0
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h025",
+    "text": "The subject is really close, around fifty centimeters away",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 0.5
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h026",
+    "text": "I'm standing roughly two meters back from the specimen tray",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 2.0
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h027",
+    "text": "Normal indoor brightness, I need moderate sensitivity",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 400
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h028",
+    "text": "The room is almost dark, I need maximum sensitivity to capture anything",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 1600
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h029",
+    "text": "Standard handheld speed to avoid motion blur",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "1/100"
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h030",
+    "text": "Low intensity fluorescence, the sensor needs a lot of time to collect light",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "2s"
+    },
+    "tier_min": 3,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h031",
+    "text": "I need to capture this process on video, this is experiment one",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "experiment_1"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h032",
+    "text": "Trial two is starting now, keep it under a minute, H265 please",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "trial_2",
+      "max_duration_s": 60,
+      "codec": "h265"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h033",
+    "text": "I want to start logging this sample systematically",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "sample_analysis"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h034",
+    "text": "We're running the gel now, I need to start the project A documentation",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "protein_gel",
+      "project_id": "PROJ-A"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h035",
+    "text": "I need multiple exposures to catch the exact moment",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": true,
+      "count": 5
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h036",
+    "text": "I don't need rapid fire anymore, back to single frame",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": false
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h037",
+    "text": "Mark this as the start of the experiment at the bottom",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "time point zero",
+      "position": "bottom"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h038",
+    "text": "Something looks off about this sample, flag it in the center of the image",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "contamination suspected",
+      "position": "center"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h039",
+    "text": "Capture this as the baseline image for comparison",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "label": "reference"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h040",
+    "text": "The flash would disturb the specimen, just capture without it",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "flash_override": "off"
+    },
+    "tier_min": 4,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h041",
+    "text": "Configure for detailed work: main camera, full quality, no artificial light",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "back",
+      "resolution": "high",
+      "flash": "off"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h042",
+    "text": "Close-up specimen work: close-up lens, highest quality, slightly underexposed",
+    "expected_tool": "configure_capture",
+    "expected_args": {
+      "camera": "macro",
+      "exposure_ev": -0.5,
+      "resolution": "max"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h043",
+    "text": "I'm starting a new project today, ID is XYZ zero zero one",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "XYZ-001"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h044",
+    "text": "Set everything up for my experiment: BIO forty two, I'm Martin, document automatically",
+    "expected_tool": "configure_session",
+    "expected_args": {
+      "project_id": "BIO-42",
+      "experimenter": "Martin",
+      "auto_documentation": true
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h045",
+    "text": "I want the close-up photography settings loaded",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "macro"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h046",
+    "text": "We're doing field documentation today, use the right preset",
+    "expected_tool": "apply_preset",
+    "expected_args": {
+      "preset_name": "landscape"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h047",
+    "text": "I need to include this data in a report, get me a PDF",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "pdf"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h048",
+    "text": "I need all the numerical data for my analysis, CSV with everything",
+    "expected_tool": "export_session",
+    "expected_args": {
+      "format": "csv",
+      "include_raw": true
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h049",
+    "text": "Upload everything to the notebook for EXP zero zero one",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-001"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h050",
+    "text": "Push replicate two data to EXP zero forty two in the notebook",
+    "expected_tool": "sync_to_eln",
+    "expected_args": {
+      "experiment_id": "EXP-042",
+      "notes": "second replicate"
+    },
+    "tier_min": 5,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h051",
+    "text": "The bright background is killing the foreground detail, I need full dynamic range",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h052",
+    "text": "The HDR processing is too aggressive for scientific imaging",
+    "expected_tool": "toggle_hdr",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h053",
+    "text": "I need accurate colors for this fluorescence imaging, P3 please",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "display_p3"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h054",
+    "text": "No color processing at all, I'll calibrate in post",
+    "expected_tool": "set_color_profile",
+    "expected_args": {
+      "profile": "raw"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h055",
+    "text": "I want a quick glance at each image before moving on",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "3s"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h056",
+    "text": "Stop showing me the preview after every shot, it slows me down",
+    "expected_tool": "set_review_mode",
+    "expected_args": {
+      "duration": "off"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h057",
+    "text": "No location data in this dataset, we need to protect site confidentiality",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": false
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h058",
+    "text": "I need to know exactly where each specimen was photographed",
+    "expected_tool": "toggle_location_tags",
+    "expected_args": {
+      "on": true
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h059",
+    "text": "I need smooth slow motion playback, set the frame rate high",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "60"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  },
+  {
+    "id": "h060",
+    "text": "Standard frame rate for documentation video",
+    "expected_tool": "set_video_fps",
+    "expected_args": {
+      "fps": "30"
+    },
+    "tier_min": 6,
+    "split": "holdout",
+    "difficulty": "v3",
+    "smoke": false,
+    "negative": false
+  }
+]

@@ -14,6 +14,11 @@ Call it immediately. Do not ask for clarification.
 - Commands about recording → `start_recording`; documentation → `start_documentation`; photos → `take_photo`.
 - Session, preset, export, and sync commands have their own dedicated tools.
 
+**Boolean parameters — direction matters:**
+- Words like **on, enable, activate, show, start, turn on, open** → `on: true`
+- Words like **off, disable, deactivate, hide, stop, turn off, close, remove** → `on: false`
+- Apply this rule to ALL boolean parameters including `on`, `enabled`, and similar fields.
+
 **Parameter extraction:**
 - Extract numeric values literally: "three times" → 3.0, "four hundred ISO" → 400, "one hundredth" → "1/100", "sixteen by nine" → "16:9".
 - For enum parameters, map words to the closest valid enum value.

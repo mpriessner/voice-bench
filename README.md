@@ -10,16 +10,18 @@ cd voice-bench
 uv sync
 
 # 2. Set up API keys (copy and edit)
-cp .env.example .env    # then fill in GEMINI_API_KEY
+cp .env.example .env    # then fill in GEMINI_API_KEY and OPENAI_API_KEY
 
 # 3. Generate audio fixtures (one-time, requires macOS + ffmpeg)
 voice-bench gen-audio
 
 # 4. Probe connectivity
 voice-bench probe --agent gemini-live
+voice-bench probe --agent openai-realtime
 
 # 5. Run smoke benchmark (5 prompts, 5 tools)
 voice-bench run --agent gemini-live --tools 5 --mode smoke
+voice-bench run --agent openai-realtime --tools 5 --mode smoke
 ```
 
 Results are written to `results/<run-id>.jsonl` and `results/<run-id>.csv`.
@@ -31,12 +33,14 @@ Results are written to `results/<run-id>.jsonl` and `results/<run-id>.csv`.
 | `GEMINI_API_KEY` | Yes (for gemini-live) | — | Google AI API key |
 | `GEMINI_LIVE_MODEL` | No | `gemini-3.1-flash-live-preview` | Live API model ID |
 | `GEMINI_VOICE` | No | `Kore` | Voice name |
+| `OPENAI_API_KEY` | Yes (for openai-realtime) | — | OpenAI API key |
+| `OPENAI_REALTIME_MODEL` | No | `gpt-realtime` | Realtime model ID |
 
 ## Commands
 
 ```
-voice-bench probe    --agent gemini-live
-voice-bench run      --agent gemini-live --tools 5|10|15|20|30 --mode smoke|full
+voice-bench probe    --agent gemini-live|openai-realtime
+voice-bench run      --agent gemini-live|openai-realtime --tools 5|10|15|20|30 --mode smoke|full
 voice-bench gen-audio                    # regenerate WAV fixtures
 ```
 
@@ -46,20 +50,25 @@ voice-bench gen-audio                    # regenerate WAV fixtures
 src/voice_bench/
   cli.py             # Click entry point
   models.py          # TurnTimeline, Score, ToolCallEvent, TurnResult
-  tools.py           # 25 dummy tools in 5 tiers
+  tools.py           # 30 dummy tools in 6 tiers
+  audio.py           # Shared PCM16 audio loader (16kHz/24kHz)
   scoring.py         # score_turn, fuzzy arg matcher
   runner.py          # BenchmarkRunner
   adapters/
     base.py          # NativeVoiceAdapter protocol
-    gemini_live.py   # Gemini Live adapter (first slice)
+    gemini_live.py   # Gemini Live adapter
+    openai_realtime.py  # OpenAI Realtime adapter
 
 prompts/
   manifest.json      # 50 prompts (30 train / 10 val / 10 holdout)
   system/
-    gemini-live.md   # system prompt (optimizer edits this)
+    gemini-live.md      # system prompt for Gemini
+    openai-realtime.md  # system prompt for OpenAI
   audio/say/         # pre-rendered WAVs (gitignored)
 
 results/             # run outputs (gitignored)
+tests/
+  test_audio.py      # unit tests for audio helper
 ```
 
 ## Scoring

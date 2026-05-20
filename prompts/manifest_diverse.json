@@ -1,0 +1,330 @@
+[
+  {
+    "id": "d_p001",
+    "text": "Turn on the flash",
+    "expected_tool": "toggle_flash",
+    "expected_args": {
+      "on": true
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p002",
+    "text": "Show the grid overlay",
+    "expected_tool": "toggle_grid_overlay",
+    "expected_args": {
+      "on": true
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p003",
+    "text": "Switch to macro focus mode",
+    "expected_tool": "toggle_macro_mode",
+    "expected_args": {
+      "on": true
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p004",
+    "text": "Turn off image stabilization, I'm on a tripod",
+    "expected_tool": "toggle_stabilization",
+    "expected_args": {
+      "on": false
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p005",
+    "text": "Enable voice captions",
+    "expected_tool": "toggle_voice_captions",
+    "expected_args": {
+      "on": true
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": true,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p006",
+    "text": "Switch to the front camera",
+    "expected_tool": "switch_camera",
+    "expected_args": {
+      "lens": "front"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p007",
+    "text": "Set resolution to high quality",
+    "expected_tool": "set_resolution",
+    "expected_args": {
+      "resolution": "high"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p008",
+    "text": "Set white balance to fluorescent",
+    "expected_tool": "set_white_balance",
+    "expected_args": {
+      "preset": "fluorescent"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p009",
+    "text": "Set the capture timer to five seconds",
+    "expected_tool": "set_timer",
+    "expected_args": {
+      "delay": "5s"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p010",
+    "text": "Set aspect ratio to square",
+    "expected_tool": "set_aspect_ratio",
+    "expected_args": {
+      "ratio": "1:1"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p011",
+    "text": "Lower exposure by one stop",
+    "expected_tool": "set_exposure",
+    "expected_args": {
+      "ev": -1.0
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p012",
+    "text": "Zoom to three times magnification",
+    "expected_tool": "set_zoom",
+    "expected_args": {
+      "level": 3.0
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p013",
+    "text": "Lock focus at fifty centimeters",
+    "expected_tool": "set_focus_distance",
+    "expected_args": {
+      "distance_m": 0.5
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p014",
+    "text": "Set ISO to sixteen hundred",
+    "expected_tool": "set_iso",
+    "expected_args": {
+      "iso": 1600
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p015",
+    "text": "Set shutter speed to one hundredth of a second",
+    "expected_tool": "set_shutter_speed",
+    "expected_args": {
+      "speed": "1/100"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p016",
+    "text": "Start recording, label it experiment one",
+    "expected_tool": "start_recording",
+    "expected_args": {
+      "label": "experiment_1"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p017",
+    "text": "Begin a documentation session for sample analysis",
+    "expected_tool": "start_documentation",
+    "expected_args": {
+      "label": "sample_analysis"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p018",
+    "text": "Enable burst mode with five frames",
+    "expected_tool": "set_capture_burst",
+    "expected_args": {
+      "enabled": true,
+      "count": 5
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p019",
+    "text": "Add a note at the bottom: time point zero",
+    "expected_tool": "annotate_frame",
+    "expected_args": {
+      "text": "time point zero",
+      "position": "bottom"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_p020",
+    "text": "Take a reference photo",
+    "expected_tool": "take_photo",
+    "expected_args": {
+      "label": "reference"
+    },
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": false,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n001",
+    "text": "What's the weather like outside today",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n002",
+    "text": "Tell me a bit about the history of microscopy",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n003",
+    "text": "Can you read me back the last annotation I added",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n004",
+    "text": "What's the current battery level on this device",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n005",
+    "text": "How many photos have I taken this session",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  },
+  {
+    "id": "d_n006",
+    "text": "Describe what you can see in the current frame",
+    "expected_tool": null,
+    "expected_args": null,
+    "split": "train",
+    "difficulty": "v1",
+    "smoke": false,
+    "negative": true,
+    "audio_subdir": "diverse"
+  }
+]

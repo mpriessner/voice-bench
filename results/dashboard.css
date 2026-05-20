@@ -1,0 +1,79 @@
+/* voice-bench dashboard styles */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+
+header { padding: 16px 32px; border-bottom: 1px solid #1e2535;
+         display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+header h1 { font-size: 1.4rem; font-weight: 600; }
+header span { font-size: 0.85rem; color: #64748b; flex: 1; }
+
+.filter-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.filter-row label { font-size: 0.8rem; color: #64748b; display: flex; gap: 6px; align-items: center; }
+.filter-row select { background: #161b27; border: 1px solid #1e2535; color: #e2e8f0;
+                     padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 24px 32px; }
+.chart-card { background: #161b27; border: 1px solid #1e2535; border-radius: 12px; padding: 20px; }
+.chart-card h2 { font-size: 0.9rem; font-weight: 600; color: #94a3b8;
+                 text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+.chart-wrap { position: relative; height: 280px; }
+.full-width { grid-column: 1 / -1; }
+
+/* Stats */
+.stat-row { display: flex; gap: 16px; padding: 16px 32px; flex-wrap: wrap; }
+.stat { background: #161b27; border: 1px solid #1e2535; border-radius: 10px;
+        padding: 16px 20px; flex: 1; min-width: 140px; }
+.stat-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase;
+              letter-spacing: 0.05em; margin-bottom: 6px; }
+.stat-val { font-size: 1.6rem; font-weight: 700; }
+.stat-sub { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+
+/* Heatmap */
+.heatmap-wrap { overflow-x: auto; }
+.heatmap-table { border-collapse: collapse; font-size: 0.8rem; }
+.heatmap-table th { padding: 4px 8px; color: #64748b; font-weight: 500; text-align: center; }
+.heatmap-table td { padding: 4px 8px; text-align: center; font-weight: 600; min-width: 60px;
+                    border: 1px solid #1a2030; }
+.hm-agent-label { text-align: left !important; font-weight: 500; color: #94a3b8;
+                  white-space: nowrap; padding-right: 16px !important; line-height: 1.3; }
+.hm-model-id { font-size: 0.72rem; font-weight: 400; color: #64748b;
+               font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th { text-align: left; padding: 8px 12px; color: #64748b; font-weight: 500;
+     border-bottom: 1px solid #1e2535; }
+td { padding: 8px 12px; border-bottom: 1px solid #1a2030; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+.pass { color: #4ade80; }
+.fail { color: #f87171; }
+.warn { color: #fbbf24; }
+.dimmed { color: #475569; }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+         font-size: 0.75rem; font-weight: 600; }
+.badge-gemini-live { background: #1a3a5c; color: #60a5fa; }
+.badge-openai-realtime { background: #1a3a2a; color: #4ade80; }
+.badge-claude { background: #3a2a1a; color: #f59e0b; }
+.badge-gpt { background: #2a1a3a; color: #c084fc; }
+.badge-gemini { background: #1a2a3a; color: #38bdf8; }
+
+/* Explorer */
+.explorer-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.explorer-controls label { font-size: 0.82rem; color: #64748b; display: flex; gap: 6px; align-items: center; }
+.explorer-controls input, .explorer-controls select {
+  background: #1a2030; border: 1px solid #1e2535; color: #e2e8f0;
+  padding: 5px 10px; border-radius: 6px; font-size: 0.82rem; }
+
+.pagination { display: flex; gap: 8px; padding: 12px 0; align-items: center;
+              font-size: 0.82rem; color: #64748b; }
+.pagination button { background: #1e2535; border: none; color: #94a3b8;
+                     padding: 4px 12px; border-radius: 6px; cursor: pointer; }
+.pagination button:disabled { opacity: 0.4; cursor: default; }
+.pagination button.active { background: #1e3a5f; color: #60a5fa; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .full-width { grid-column: 1; }
+}
